@@ -87,6 +87,20 @@ PROCESS_CONTEXT = {
     },
 }
 
+DISPLAY_LABELS = {
+    "amount": "Amount",
+    "entity": "Entity",
+    "exception_count": "Exception count",
+    "finance_action": "Finance action",
+    "message": "Exception explanation",
+    "period": "Period",
+    "process_area": "Process area",
+    "score": "Score",
+    "severity": "Exception type",
+    "status": "Status",
+    "why_it_matters": "Why it matters",
+}
+
 
 @st.cache_data
 def load_mvp_model() -> tuple[dict[str, pd.DataFrame], pd.DataFrame, pd.DataFrame, pd.DataFrame]:
@@ -124,6 +138,25 @@ def add_exception_context(frame: pd.DataFrame) -> pd.DataFrame:
     return enriched
 
 
+def prepare_display_table(frame: pd.DataFrame, columns: list[str]) -> pd.DataFrame:
+    display = frame[columns].copy()
+    if "score" in display.columns:
+        display["score"] = display["score"].map(lambda score: f"{float(score):.1f}")
+    if "status" in display.columns:
+        display["status"] = display["status"].astype(str).str.title()
+    if "severity" in display.columns:
+        display["severity"] = display["severity"].astype(str).str.title()
+    if "process_area" in display.columns:
+        display["process_area"] = (
+            display["process_area"].astype(str).str.replace("_", " ").str.title()
+        )
+    if "amount" in display.columns:
+        display["amount"] = display["amount"].map(
+            lambda amount: "" if pd.isna(amount) else f"{float(amount):,.1f}"
+        )
+    return display.rename(columns=DISPLAY_LABELS)
+
+
 def show_exception_view(process_area: str, title: str) -> None:
     context = PROCESS_CONTEXT[process_area]
     st.subheader(title)
@@ -134,7 +167,8 @@ def show_exception_view(process_area: str, title: str) -> None:
         filtered_exceptions[filtered_exceptions["process_area"] == process_area]
     )
     st.dataframe(
-        process_exceptions[
+        prepare_display_table(
+            process_exceptions,
             [
                 "severity",
                 "entity",
@@ -143,8 +177,8 @@ def show_exception_view(process_area: str, title: str) -> None:
                 "why_it_matters",
                 "finance_action",
                 "amount",
-            ]
-        ],
+            ],
+        ),
         use_container_width=True,
         hide_index=True,
     )
@@ -156,7 +190,8 @@ entities = sorted(overall_scores["entity"].astype(str).unique())
 
 st.title("Finance Close Control Tower")
 st.caption("Month-end finance systems control layer | Synthetic data demo")
-st.info(SYNTHETIC_DISCLAIMER)
+with st.expander("Synthetic-data and privacy note", expanded=False):
+    st.caption(SYNTHETIC_DISCLAIMER)
 st.write(
     "This demo turns standard finance exports into a close-readiness view: what is "
     "reconciled, what is unresolved, what is ageing, and what needs action before CFO sign-off."
@@ -205,7 +240,10 @@ with tabs[0]:
         "month-end controls. Red status means a critical exception needs finance review."
     )
     st.dataframe(
-        filtered_overall[["entity", "period", "score", "status", "exception_count"]],
+        prepare_display_table(
+            filtered_overall,
+            ["entity", "period", "score", "status", "exception_count"],
+        ),
         use_container_width=True,
         hide_index=True,
     )
@@ -215,12 +253,11 @@ with tabs[0]:
         "Each control area is scored separately so reviewers can see whether the close risk "
         "comes from reconciliations, cash, statutory controls, or group reporting."
     )
-    display_scores = filtered_process.copy()
-    display_scores["process_area"] = (
-        display_scores["process_area"].str.replace("_", " ").str.title()
-    )
     st.dataframe(
-        display_scores[["entity", "period", "process_area", "score", "status", "exception_count"]],
+        prepare_display_table(
+            filtered_process,
+            ["entity", "period", "process_area", "score", "status", "exception_count"],
+        ),
         use_container_width=True,
         hide_index=True,
     )
@@ -232,7 +269,8 @@ with tabs[0]:
     )
     display_exceptions = add_exception_context(filtered_exceptions)
     st.dataframe(
-        display_exceptions[
+        prepare_display_table(
+            display_exceptions,
             [
                 "severity",
                 "process_area",
@@ -242,8 +280,8 @@ with tabs[0]:
                 "why_it_matters",
                 "finance_action",
                 "amount",
-            ]
-        ],
+            ],
+        ),
         use_container_width=True,
         hide_index=True,
     )

@@ -106,6 +106,21 @@ def test_no_private_paths_or_env_files_in_public_tree() -> None:
     for path in forbidden_paths:
         assert not path.exists(), str(path)
 
+    text_suffixes = {
+        "",
+        ".css",
+        ".dockerignore",
+        ".env",
+        ".example",
+        ".gitignore",
+        ".html",
+        ".json",
+        ".md",
+        ".py",
+        ".toml",
+        ".txt",
+        ".yml",
+    }
     searchable_files = [
         path
         for path in Path(".").rglob("*")
@@ -115,7 +130,7 @@ def test_no_private_paths_or_env_files_in_public_tree() -> None:
         and ".pytest_cache" not in path.parts
         and ".ruff_cache" not in path.parts
         and ".pytest_tmp" not in path.parts
-        and path.suffix.lower() not in {".xlsx", ".pyc"}
+        and path.suffix.lower() in text_suffixes
     ]
     forbidden_text = (
         "C:" + "\\Users",

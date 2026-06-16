@@ -121,6 +121,16 @@ def test_no_private_paths_or_env_files_in_public_tree() -> None:
         ".txt",
         ".yml",
     }
+    skipped_binary_suffixes = {
+        ".gif",
+        ".ico",
+        ".jpeg",
+        ".jpg",
+        ".png",
+        ".webp",
+        ".xlsx",
+        ".pyc",
+    }
     searchable_files = [
         path
         for path in Path(".").rglob("*")
@@ -130,6 +140,7 @@ def test_no_private_paths_or_env_files_in_public_tree() -> None:
         and ".pytest_cache" not in path.parts
         and ".ruff_cache" not in path.parts
         and ".pytest_tmp" not in path.parts
+        and path.suffix.lower() not in skipped_binary_suffixes
         and path.suffix.lower() in text_suffixes
     ]
     forbidden_text = (

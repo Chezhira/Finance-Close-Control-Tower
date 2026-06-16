@@ -1,10 +1,27 @@
 # Finance Close Control Tower
 
-Finance Close Control Tower is a finance systems control layer for month-end close readiness, built as a production-style portfolio project by Zahidah Murira. It converts synthetic accounting exports into a CFO-ready view of what is reconciled, what is unresolved, what is ageing, what is materially risky, and what needs action before reporting.
+Finance Close Control Tower is a production-style finance systems control layer for month-end close readiness. It turns synthetic accounting exports into a CFO-ready view of reconciled balances, unresolved exceptions, ageing risk, material control issues, and actions needed before reporting.
 
 All data in this repository is synthetic. No employer, client, bank, payroll, customer, supplier, tax authority, or confidential company data is included.
 
-Target portfolio roles: Finance Systems Analyst, Finance Automation Specialist, Finance Engineer, FP&A Systems Analyst, Close and Controls Analyst, and Analytics Engineer for finance operations.
+Target portfolio roles:
+
+- Finance Systems Analyst
+- Finance Automation Specialist
+- Finance Engineer
+- FP&A Systems Analyst
+- Close and Controls Analyst
+- Analytics Engineer for finance operations
+
+## Reviewer Takeaway
+
+This project demonstrates finance engineering capability through:
+
+- Finance systems judgement: translating month-end accounting exports into a control-oriented close view.
+- Month-end close control logic: checking reconciliations, suspense, cash, VAT, and intercompany readiness.
+- Deterministic automation: no LLM dependency, no hidden judgement calls, and repeatable sample outputs.
+- Testable validation rules: finance calculations are implemented outside Streamlit and covered by pytest.
+- Public-demo data protection: synthetic bundled data only, with no uploads, secrets, or private files required.
 
 ## Finance Problem
 
@@ -93,18 +110,11 @@ The sample pipeline writes portfolio-review artifacts to `outputs/sample_close_p
 
 ## Deployment Modes
 
-This project supports two deployment modes:
+The primary public deployment target is Streamlit Community Cloud, running from the GitHub repository with bundled synthetic sample data only. Docker and Google Cloud Run notes are included as production-style stretch guidance, not as a claim of live production deployment.
 
-1. Portfolio demo deployment on Streamlit Community Cloud.
-2. Production-style deployment with Docker and Google Cloud Run.
+GitHub Pages may be used only for static documentation, screenshots, or a landing page. It is not a host for the Python Streamlit app.
 
-Streamlit Community Cloud is the primary MVP target and must run only with the committed synthetic sample data. The public app is read-only and demo-oriented. Upload handling, when added, must process files in memory only and must not persist uploaded files.
-
-Docker and Google Cloud Run are secondary/stretch deployment targets. Local container runs may load environment variables from `.env`; hosted environments must use cloud secret management. No secrets, API keys, client data, employer data, or real accounting exports may be committed.
-
-GitHub Pages may be used only for static documentation, screenshots, and a project landing page. It is not a host for the Python Streamlit application.
-
-See [docs/deployment.md](docs/deployment.md) for exact commands, environment variables, and billing guardrails.
+See [docs/deployment.md](docs/deployment.md) for deployment commands, environment variables, and billing guardrails.
 
 ## Streamlit Community Cloud Public Demo
 
@@ -128,11 +138,7 @@ Public demo defaults:
 
 ## Portfolio Use and Reuse Restrictions
 
-This repository is published as a professional portfolio project by Zahidah Murira. The code, finance logic, scoring model, documentation, and sample outputs are provided for demonstration and review purposes only. They may not be copied, republished, sold, incorporated into commercial products, or used to train competing systems without written permission.
-
-All data is synthetic. No employer, client, bank, payroll, customer, supplier, tax authority, or confidential company data is included.
-
-See `LICENSE`, `NOTICE`, and `SECURITY.md` before reusing, reviewing, or sharing this project.
+This repository is published as a professional portfolio project by Zahidah Murira. It is provided for demonstration and review only, with reuse restrictions described in [LICENSE](LICENSE), [NOTICE](NOTICE), and [SECURITY.md](SECURITY.md).
 
 ## Current Status
 

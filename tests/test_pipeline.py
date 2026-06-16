@@ -12,10 +12,11 @@ from finance_close_control_tower.ingestion import load_sample_data
 
 def test_sample_close_pack_export(tmp_path: Path) -> None:
     datasets = load_sample_data(Path("data/sample"))
-    markdown_path, excel_path = write_sample_close_pack(datasets, tmp_path)
+    markdown_path, excel_path, pdf_path = write_sample_close_pack(datasets, tmp_path)
 
     assert markdown_path.exists()
     assert excel_path.exists()
+    assert pdf_path.exists()
     content = markdown_path.read_text(encoding="utf-8")
     assert SYNTHETIC_DISCLAIMER in content
     assert "Built by Zahidah Murira" in content
@@ -27,9 +28,27 @@ def test_sample_close_pack_export(tmp_path: Path) -> None:
 
 def test_close_pack_artifacts_can_be_built_in_memory() -> None:
     datasets = load_sample_data(Path("data/sample"))
-    markdown_content, excel_bytes = build_close_pack_artifacts(datasets)
+    artifacts = build_close_pack_artifacts(datasets)
 
-    assert SYNTHETIC_DISCLAIMER in markdown_content
-    assert "VAT closing balance variance" in markdown_content
-    assert "Action:" in markdown_content
-    assert excel_bytes.startswith(b"PK")
+    assert SYNTHETIC_DISCLAIMER in artifacts.markdown
+    assert "VAT closing balance variance" in artifacts.markdown
+    assert "Action:" in artifacts.markdown
+    assert artifacts.excel.startswith(b"PK")
+    assert artifacts.pdf.startswith(b"%PDF")
+
+
+def test_pdf_close_pack_contains_required_report_sections() -> None:
+    datasets = load_sample_data(Path("data/sample"))
+    artifacts = build_close_pack_artifacts(datasets)
+    pdf_text = artifacts.pdf.decode("latin-1")
+
+    assert "Finance Close Control Tower" in pdf_text
+    assert "CFO Close Pack" in pdf_text
+    assert "Synthetic data demo only" in pdf_text
+    assert "Executive summary" in pdf_text
+    assert "Overall close-readiness score" in pdf_text
+    assert "High-risk exception summary" in pdf_text
+    assert "Ageing and suspense highlights" in pdf_text
+    assert "VAT / tax control exceptions" in pdf_text
+    assert "Intercompany mismatch summary" in pdf_text
+    assert "Suggested finance actions / next steps" in pdf_text

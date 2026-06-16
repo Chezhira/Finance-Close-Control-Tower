@@ -17,6 +17,7 @@ def test_requirements_are_runtime_only_for_public_demo() -> None:
 
     assert requirements == [
         "duckdb>=1.0",
+        "fpdf2>=2.8",
         "openpyxl>=3.1",
         "pandas>=2.2",
         "streamlit>=1.36",

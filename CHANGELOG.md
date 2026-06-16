@@ -11,7 +11,7 @@ Initial public release candidate for Finance Close Control Tower.
 - Deterministic validation rules for trial balance integrity, reconciliations, suspense, bank reconciliation, VAT control movement, and intercompany matching.
 - Close-readiness scoring by entity and process area.
 - Plain-English exception views explaining what each exception means, why it matters, and what finance action to take.
-- Markdown and Excel CFO close-pack outputs under `outputs/sample_close_pack/`.
+- PDF, Markdown, and Excel CFO close-pack outputs under `outputs/sample_close_pack/`.
 - Synthetic sample data under `data/sample/`.
 - Streamlit Community Cloud readiness documentation and URL placeholder.
 - Docker and Google Cloud Run stretch deployment notes.

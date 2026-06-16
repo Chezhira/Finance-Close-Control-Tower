@@ -47,7 +47,7 @@ This project demonstrates how finance systems thinking can turn ordinary account
 - Runs deterministic close-control checks for trial balance integrity, reconciliations, suspense, bank rec, VAT, and intercompany.
 - Calculates close-readiness scores by entity and process area.
 - Displays a Streamlit dashboard with exception context and recommended finance actions.
-- Exports a CFO close pack in Markdown and Excel.
+- Exports a CFO close pack in polished PDF, Markdown, and Excel formats.
 
 ## Why The Controls Matter
 
@@ -65,7 +65,7 @@ This project demonstrates how finance systems thinking can turn ordinary account
 - Validate standard finance export schemas before analysis.
 - Generate reproducible synthetic trial balance, GL, reconciliation, ageing, bank, VAT, and intercompany files.
 - Run privacy guardrails before sample data and close-pack outputs are published.
-- Produce Markdown and Excel close-pack artifacts for portfolio review.
+- Produce PDF, Markdown, and Excel close-pack artifacts for portfolio review.
 - Keep all core logic deterministic and testable outside Streamlit.
 
 ## Quick Start
@@ -92,6 +92,7 @@ The sample pipeline writes portfolio-review artifacts to `outputs/sample_close_p
 
 - `sample_close_pack_summary.md`: management summary, readiness scores, source files, and exception explanations.
 - `sample_close_pack.xlsx`: CFO-style workbook with cover, overall scores, process scores, exceptions, and source-file summary.
+- `sample_close_pack.pdf`: polished CFO-ready report with executive summary, risk highlights, and next steps.
 
 ## Screenshots
 

@@ -303,20 +303,26 @@ with tabs[5]:
 
 with tabs[6]:
     st.subheader("CFO Close Pack Export")
-    markdown_content, excel_bytes = build_close_pack_artifacts(datasets)
+    artifacts = build_close_pack_artifacts(datasets)
     st.write(
         "The close pack is generated in memory from bundled synthetic sample data and "
         "summarizes readiness scores, source files, exceptions, and management actions."
     )
     st.download_button(
+        "Download PDF Close Pack",
+        data=artifacts.pdf,
+        file_name="sample_close_pack.pdf",
+        mime="application/pdf",
+    )
+    st.download_button(
         "Download Markdown Close Pack",
-        data=markdown_content,
+        data=artifacts.markdown,
         file_name="sample_close_pack_summary.md",
         mime="text/markdown",
     )
     st.download_button(
         "Download Excel Close Pack",
-        data=excel_bytes,
+        data=artifacts.excel,
         file_name="sample_close_pack.xlsx",
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
     )

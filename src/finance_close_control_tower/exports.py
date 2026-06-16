@@ -1,10 +1,12 @@
 from __future__ import annotations
 
+from dataclasses import dataclass
 from datetime import UTC, datetime
 from io import BytesIO
 from pathlib import Path
 
 import pandas as pd
+from fpdf import FPDF
 
 from finance_close_control_tower.config import DEFAULT_CONFIG
 from finance_close_control_tower.scoring import (
@@ -61,6 +63,24 @@ PROCESS_GUIDANCE = {
 }
 
 
+@dataclass(frozen=True)
+class ClosePackArtifacts:
+    markdown: str
+    excel: bytes
+    pdf: bytes
+
+
+@dataclass(frozen=True)
+class ClosePackModel:
+    generated_at: str
+    period: str
+    entity_scope: str
+    exception_frame: pd.DataFrame
+    overall_score_frame: pd.DataFrame
+    process_score_frame: pd.DataFrame
+    datasets: dict[str, pd.DataFrame]
+
+
 def _pluralize_exception(count: int) -> str:
     return "exception" if count == 1 else "exceptions"
 
@@ -81,23 +101,40 @@ def _add_exception_guidance(exception_frame: pd.DataFrame) -> pd.DataFrame:
     return enriched
 
 
+def _build_close_pack_model(
+    datasets: dict[str, pd.DataFrame],
+    *,
+    period: str,
+    entity_scope: str,
+) -> ClosePackModel:
+    validation_results = run_all_validations(datasets)
+    exception_frame = _add_exception_guidance(validation_results_to_frame(validation_results))
+    process_scores = calculate_process_scores(datasets, validation_results)
+    return ClosePackModel(
+        generated_at=datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S UTC"),
+        period=period,
+        entity_scope=entity_scope,
+        exception_frame=exception_frame,
+        overall_score_frame=calculate_overall_scores(process_scores),
+        process_score_frame=process_scores_to_frame(process_scores),
+        datasets=datasets,
+    )
+
+
 def build_close_pack_artifacts(
     datasets: dict[str, pd.DataFrame],
     *,
     period: str = "2026-05",
-) -> tuple[str, bytes]:
-    generated_at = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S UTC")
-    validation_results = run_all_validations(datasets)
-    exception_frame = validation_results_to_frame(validation_results)
-    enriched_exception_frame = _add_exception_guidance(exception_frame)
-    process_scores = calculate_process_scores(datasets, validation_results)
-    process_score_frame = process_scores_to_frame(process_scores)
-    overall_score_frame = calculate_overall_scores(process_scores)
-    selected_overall = overall_score_frame[overall_score_frame["period"].astype(str) == period]
+    entity_scope: str = "All sample entities",
+) -> ClosePackArtifacts:
+    model = _build_close_pack_model(datasets, period=period, entity_scope=entity_scope)
+    selected_overall = model.overall_score_frame[
+        model.overall_score_frame["period"].astype(str) == period
+    ]
 
     row_lines = "\n".join(
         f"- {filename}: {len(frame):,} rows, {len(frame.columns):,} columns"
-        for filename, frame in sorted(datasets.items())
+        for filename, frame in sorted(model.datasets.items())
     )
     score_lines = "\n".join(
         f"- {row.entity}: {row.score}/100 ({row.status}), {row.exception_count} "
@@ -107,7 +144,7 @@ def build_close_pack_artifacts(
     exception_lines = "\n".join(
         f"- [{row.severity.upper()}] {row.process_area} | {row.entity} | {row.message} "
         f"Action: {row.finance_action}"
-        for row in enriched_exception_frame.itertuples(index=False)
+        for row in model.exception_frame.itertuples(index=False)
     )
     content = f"""# Finance Close Control Tower - Sample Close Pack
 
@@ -117,10 +154,11 @@ Built by Zahidah Murira | Finance Engineer Portfolio | Synthetic Data Demo
 
 ## Run Metadata
 
-- Generated at: {generated_at}
-- Selected period: {period}
+- Generated at: {model.generated_at}
+- Entity scope: {model.entity_scope}
+- Selected period: {model.period}
 - Rule version: {DEFAULT_CONFIG.rule_version}
-- Source files: {len(datasets)}
+- Source files: {len(model.datasets)}
 
 ## Source File Summary
 
@@ -156,15 +194,152 @@ and produced exception detail for management review.
     with pd.ExcelWriter(excel_buffer, engine="openpyxl") as writer:
         _write_excel_close_pack(
             writer,
-            generated_at=generated_at,
-            period=period,
-            overall_score_frame=overall_score_frame,
-            process_score_frame=process_score_frame,
-            exception_frame=enriched_exception_frame,
-            datasets=datasets,
+            generated_at=model.generated_at,
+            period=model.period,
+            overall_score_frame=model.overall_score_frame,
+            process_score_frame=model.process_score_frame,
+            exception_frame=model.exception_frame,
+            datasets=model.datasets,
         )
 
-    return content, excel_buffer.getvalue()
+    pdf_bytes = _build_pdf_close_pack(model)
+    return ClosePackArtifacts(
+        markdown=content,
+        excel=excel_buffer.getvalue(),
+        pdf=pdf_bytes,
+    )
+
+
+class ClosePackPDF(FPDF):
+    def footer(self) -> None:
+        self.set_y(-12)
+        self.set_font("Helvetica", size=8)
+        self.set_text_color(90, 90, 90)
+        self.cell(
+            0,
+            6,
+            "Synthetic portfolio demo | Finance Close Control Tower | Zahidah Murira",
+            align="C",
+        )
+
+
+def _write_pdf_section(pdf: FPDF, title: str, lines: list[str]) -> None:
+    pdf.set_x(pdf.l_margin)
+    pdf.set_font("Helvetica", style="B", size=12)
+    pdf.set_text_color(32, 32, 32)
+    pdf.cell(0, 8, title, new_x="LMARGIN", new_y="NEXT")
+    pdf.set_font("Helvetica", size=9)
+    pdf.set_text_color(40, 40, 40)
+    for line in lines:
+        pdf.set_x(pdf.l_margin)
+        pdf.multi_cell(0, 5, line, new_x="LMARGIN", new_y="NEXT")
+    pdf.ln(2)
+
+
+def _build_pdf_close_pack(model: ClosePackModel) -> bytes:
+    selected_overall = model.overall_score_frame[
+        model.overall_score_frame["period"].astype(str) == model.period
+    ]
+    high_risk = model.exception_frame[
+        model.exception_frame["severity"].astype(str).isin(["critical", "high"])
+    ]
+    bank_and_suspense = model.exception_frame[
+        model.exception_frame["process_area"].astype(str).isin(["bank_rec", "suspense"])
+    ]
+    vat_exceptions = model.exception_frame[
+        model.exception_frame["process_area"].astype(str) == "vat"
+    ]
+    intercompany = model.exception_frame[
+        model.exception_frame["process_area"].astype(str) == "intercompany"
+    ]
+
+    pdf = ClosePackPDF()
+    pdf.set_compression(False)
+    pdf.set_auto_page_break(auto=True, margin=16)
+    pdf.add_page()
+    pdf.set_title("Finance Close Control Tower CFO Close Pack")
+    pdf.set_author("Zahidah Murira")
+    pdf.set_subject("Synthetic data portfolio demo")
+
+    pdf.set_font("Helvetica", style="B", size=18)
+    pdf.cell(0, 10, "Finance Close Control Tower", new_x="LMARGIN", new_y="NEXT")
+    pdf.set_font("Helvetica", style="B", size=13)
+    pdf.cell(0, 8, "CFO Close Pack", new_x="LMARGIN", new_y="NEXT")
+    pdf.set_font("Helvetica", size=10)
+    pdf.multi_cell(
+        0,
+        6,
+        f"Entity: {model.entity_scope}\n"
+        f"Period: {model.period}\n"
+        f"Generated: {model.generated_at}\n"
+        f"Rule version: {DEFAULT_CONFIG.rule_version}",
+    )
+    pdf.ln(2)
+    pdf.set_font("Helvetica", style="B", size=9)
+    pdf.multi_cell(0, 5, SYNTHETIC_DISCLAIMER)
+    pdf.ln(3)
+
+    _write_pdf_section(
+        pdf,
+        "Executive summary",
+        [
+            "This report summarizes synthetic month-end close readiness using deterministic "
+            "finance control checks for reconciliations, cash, VAT, suspense, and "
+            "intercompany balances.",
+            f"Source files checked: {len(model.datasets)}.",
+        ],
+    )
+    _write_pdf_section(
+        pdf,
+        "Overall close-readiness score",
+        [
+            f"{row.entity}: {row.score}/100 ({row.status}), "
+            f"{row.exception_count} {_pluralize_exception(row.exception_count)}."
+            for row in selected_overall.itertuples(index=False)
+        ],
+    )
+    _write_pdf_section(
+        pdf,
+        "High-risk exception summary",
+        [
+            f"{row.severity.upper()} | {row.entity} | {row.message}"
+            for row in high_risk.itertuples(index=False)
+        ]
+        or ["No high-risk exceptions detected."],
+    )
+    _write_pdf_section(
+        pdf,
+        "Ageing and suspense highlights",
+        [
+            f"{row.process_area} | {row.entity} | {row.message}"
+            for row in bank_and_suspense.itertuples(index=False)
+        ]
+        or ["No ageing or suspense highlights detected."],
+    )
+    _write_pdf_section(
+        pdf,
+        "VAT / tax control exceptions",
+        [f"{row.entity} | {row.message}" for row in vat_exceptions.itertuples(index=False)]
+        or ["No VAT control exceptions detected."],
+    )
+    _write_pdf_section(
+        pdf,
+        "Intercompany mismatch summary",
+        [f"{row.entity} | {row.message}" for row in intercompany.itertuples(index=False)]
+        or ["No intercompany mismatches detected."],
+    )
+    _write_pdf_section(
+        pdf,
+        "Suggested finance actions / next steps",
+        [
+            "- Clear or review critical reconciliation and VAT exceptions before sign-off.",
+            "- Investigate aged cash and suspense items before final management reporting.",
+            "- Resolve intercompany mismatches before consolidation or group reporting.",
+            "- Keep the synthetic-data disclaimer with any shared portfolio outputs.",
+        ],
+    )
+
+    return bytes(pdf.output())
 
 
 def _write_excel_close_pack(
@@ -219,13 +394,15 @@ def write_sample_close_pack(
     output_dir: Path,
     *,
     period: str = "2026-05",
-) -> tuple[Path, Path]:
+) -> tuple[Path, Path, Path]:
     output_dir.mkdir(parents=True, exist_ok=True)
     markdown_path = output_dir / "sample_close_pack_summary.md"
     excel_path = output_dir / "sample_close_pack.xlsx"
-    markdown_content, excel_bytes = build_close_pack_artifacts(datasets, period=period)
+    pdf_path = output_dir / "sample_close_pack.pdf"
+    artifacts = build_close_pack_artifacts(datasets, period=period)
 
-    markdown_path.write_text(markdown_content, encoding="utf-8")
-    excel_path.write_bytes(excel_bytes)
+    markdown_path.write_text(artifacts.markdown, encoding="utf-8")
+    excel_path.write_bytes(artifacts.excel)
+    pdf_path.write_bytes(artifacts.pdf)
 
-    return markdown_path, excel_path
+    return markdown_path, excel_path, pdf_path

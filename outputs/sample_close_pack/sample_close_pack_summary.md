@@ -6,7 +6,8 @@ Synthetic data demo only. No employer, client, bank, payroll, customer, supplier
 
 ## Run Metadata
 
-- Generated at: 2026-06-16 17:06:07 UTC
+- Generated at: 2026-06-16 19:37:26 UTC
+- Entity scope: All sample entities
 - Selected period: 2026-05
 - Rule version: mvp-0.1.0
 - Source files: 8

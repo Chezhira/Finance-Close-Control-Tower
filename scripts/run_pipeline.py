@@ -21,9 +21,10 @@ def parse_args() -> argparse.Namespace:
 def main() -> None:
     args = parse_args()
     datasets = load_sample_data(args.data_dir)
-    markdown_path, excel_path = write_sample_close_pack(datasets, args.output_dir)
+    markdown_path, excel_path, pdf_path = write_sample_close_pack(datasets, args.output_dir)
     print(f"Created {markdown_path}")
     print(f"Created {excel_path}")
+    print(f"Created {pdf_path}")
 
 
 if __name__ == "__main__":

@@ -71,14 +71,25 @@ The sample pipeline writes portfolio-review artifacts to `outputs/sample_close_p
 
 ## Screenshots
 
-Screenshots are not committed yet. Capture instructions are available in `docs/screenshots/README.md`. Suggested placeholders for the public README once captured:
+### App overview
 
-- `docs/screenshots/executive-dashboard.png`: CFO close-readiness score and entity status.
-- `docs/screenshots/process-scores.png`: process-area scoring by entity.
-- `docs/screenshots/exceptions.png`: exception table with meaning, risk, and finance action.
-- `docs/screenshots/export-center.png`: Markdown and Excel close-pack download view.
+![Finance Close Control Tower app overview](docs/screenshots/01-app-overview.png)
 
-Capture after running `streamlit run app.py` locally or after Streamlit Community Cloud deployment.
+### Executive close-readiness dashboard
+
+![Executive close-readiness dashboard](docs/screenshots/02-executive-close-readiness.png)
+
+### Management exception review
+
+![Top management exceptions](docs/screenshots/03-management-exceptions.png)
+
+### VAT control exception review
+
+![VAT control movement exceptions](docs/screenshots/04-vat-control-exceptions.png)
+
+### CFO close pack export
+
+![CFO close pack export center](docs/screenshots/05-close-pack-export.png)
 
 ## Deployment Modes
 

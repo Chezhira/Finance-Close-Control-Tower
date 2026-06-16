@@ -1,18 +1,11 @@
 # Screenshot Capture Instructions
 
-Screenshots are intentionally not committed yet.
+The public README embeds the current screenshots in this folder:
 
-Capture these images before publishing the public portfolio page:
+1. `01-app-overview.png`
+2. `02-executive-close-readiness.png`
+3. `03-management-exceptions.png`
+4. `04-vat-control-exceptions.png`
+5. `05-close-pack-export.png`
 
-1. `executive-dashboard.png` - CFO close-readiness by entity and headline metrics.
-2. `process-scores.png` - control area scores by entity and process.
-3. `exceptions.png` - exception table showing meaning, risk, and finance action.
-4. `export-center.png` - CFO close-pack Markdown and Excel download view.
-
-Recommended local capture flow:
-
-```powershell
-streamlit run app.py
-```
-
-Open the local Streamlit URL, select the relevant tab, and save screenshots into this folder. Use synthetic sample data only. Do not capture browser windows showing local file paths, private folders, tokens, emails, or personal information.
+When refreshing screenshots, run the Streamlit app locally or use the deployed public demo, then replace these files with updated captures. Use synthetic sample data only. Do not capture browser windows showing local file paths, private folders, tokens, emails, or personal information.

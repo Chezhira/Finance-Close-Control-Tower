@@ -37,7 +37,10 @@ def test_readme_has_streamlit_cloud_public_demo_path() -> None:
 
 
 def test_readme_positions_project_as_finance_control_layer() -> None:
-    first_paragraph = Path("README.md").read_text(encoding="utf-8").split("\n\n")[1]
+    paragraphs = Path("README.md").read_text(encoding="utf-8").split("\n\n")
+    first_paragraph = next(
+        paragraph for paragraph in paragraphs if "Finance Close Control Tower is" in paragraph
+    )
 
     assert "finance systems control layer" in first_paragraph
     assert "CFO-ready view" in first_paragraph

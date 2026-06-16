@@ -1,5 +1,12 @@
 # Finance Close Control Tower
 
+![Python](https://img.shields.io/badge/Python-3.11%2B-blue)
+![Lint](https://img.shields.io/badge/Lint-Ruff-blue)
+![Format](https://img.shields.io/badge/Format-Ruff-black)
+![CI](https://github.com/Chezhira/Finance-Close-Control-Tower/actions/workflows/ci.yml/badge.svg)
+![License](https://img.shields.io/badge/License-Portfolio%20Use%20Only-lightgrey)
+![Data](https://img.shields.io/badge/Data-Synthetic%20Only-green)
+
 Finance Close Control Tower is a production-style finance systems control layer for month-end close readiness. It turns synthetic accounting exports into a CFO-ready view of reconciled balances, unresolved exceptions, ageing risk, material control issues, and actions needed before reporting.
 
 All data in this repository is synthetic. No employer, client, bank, payroll, customer, supplier, tax authority, or confidential company data is included.

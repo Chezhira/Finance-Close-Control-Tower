@@ -125,7 +125,7 @@ See [docs/deployment.md](docs/deployment.md) for deployment commands, environmen
 
 ## Streamlit Community Cloud Public Demo
 
-Public demo URL: `TODO: add Streamlit Community Cloud app URL after deployment`.
+Public demo URL: `https://finance-close-control-tower.streamlit.app/`.
 
 Deployment path:
 

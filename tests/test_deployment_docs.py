@@ -126,8 +126,10 @@ def test_no_private_paths_or_env_files_in_public_tree() -> None:
         ".ico",
         ".jpeg",
         ".jpg",
+        ".pdf",
         ".png",
         ".webp",
+        ".bin",
         ".xlsx",
         ".pyc",
     }

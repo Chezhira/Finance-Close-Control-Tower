@@ -30,9 +30,7 @@ def test_readme_has_streamlit_cloud_public_demo_path() -> None:
     content = Path("README.md").read_text(encoding="utf-8")
 
     assert "Streamlit Community Cloud Public Demo" in content
-    assert (
-        "Public demo URL: `https://finance-close-control-tower.streamlit.app/`" in content
-    )
+    assert "Public demo URL: `https://finance-close-control-tower.streamlit.app/`" in content
     assert "Set the app entrypoint to `app.py`" in content
 
 
@@ -63,9 +61,7 @@ def test_readme_includes_release_required_sections() -> None:
     content = Path("README.md").read_text(encoding="utf-8")
 
     assert "Target portfolio roles:" in content
-    assert (
-        "Public demo URL: `https://finance-close-control-tower.streamlit.app/`" in content
-    )
+    assert "Public demo URL: `https://finance-close-control-tower.streamlit.app/`" in content
     assert "Demo Outputs" in content
     assert "No employer, client, bank, payroll, customer, supplier" in content
 

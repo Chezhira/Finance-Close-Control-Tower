@@ -1,0 +1,3 @@
+entity,period,bank_account,item_date,description,amount,currency,category,status,owner
+Northstar Retail Ltd,2026-05,Synthetic Operating Account,2026-05-14,Deposit in transit from synthetic settlement batch,3200.0,GBP,Deposit in transit,Open,Finance Owner A
+Harbour Services Ltd,2026-05,Synthetic Operating Account,2026-05-09,Unknown synthetic bank charge pending coding,-185.0,GBP,Unknown bank charge,Investigating,Finance Owner B

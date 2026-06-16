@@ -1,0 +1,4 @@
+period,entity,counterparty,account_type,amount,currency,transaction_ref
+2026-05,Northstar Retail Ltd,Harbour Services Ltd,Receivable,15000.0,GBP,IC-SYN-001
+2026-05,Harbour Services Ltd,Northstar Retail Ltd,Payable,-15000.0,GBP,IC-SYN-001
+2026-05,Harbour Services Ltd,Northstar Retail Ltd,Receivable,2500.0,GBP,IC-SYN-002

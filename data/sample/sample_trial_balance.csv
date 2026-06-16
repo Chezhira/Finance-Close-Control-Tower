@@ -1,0 +1,5 @@
+entity,period,account_code,account_name,account_type,debit,credit,closing_balance,currency
+Northstar Retail Ltd,2026-05,1000,Cash Control,Asset,85000.0,0.0,85000.0,GBP
+Northstar Retail Ltd,2026-05,4000,Sales Revenue,Revenue,0.0,85000.0,-85000.0,GBP
+Harbour Services Ltd,2026-05,1000,Cash Control,Asset,62000.0,0.0,62000.0,GBP
+Harbour Services Ltd,2026-05,4000,Service Revenue,Revenue,0.0,62000.0,-62000.0,GBP

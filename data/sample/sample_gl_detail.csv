@@ -1,0 +1,3 @@
+entity,period,journal_id,journal_date,account_code,account_name,debit,credit,description,preparer,source_system,is_manual
+Northstar Retail Ltd,2026-05,JNL-2026-0501,2026-05-31,5000,Month-End Accruals,4500.0,0.0,Synthetic accrual for demo services,Finance Owner A,Synthetic ERP,True
+Harbour Services Ltd,2026-05,JNL-2026-0502,2026-05-31,2100,Accrued Costs,0.0,12000.0,Synthetic management adjustment,Finance Owner B,Synthetic ERP,True

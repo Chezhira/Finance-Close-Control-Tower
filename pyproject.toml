@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "finance-close-control-tower"
+version = "0.1.0"
+description = "Synthetic finance close control tower for close-readiness validation, scoring, and CFO-ready reporting."
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{ name = "Zahidah Murira" }]
+dependencies = [
+    "duckdb>=1.0",
+    "openpyxl>=3.1",
+    "pandas>=2.2",
+    "streamlit>=1.36",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.5",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.ruff.lint.per-file-ignores]
+"app.py" = ["E402"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

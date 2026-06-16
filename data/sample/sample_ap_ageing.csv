@@ -1,0 +1,2 @@
+entity,period,supplier,bill_no,bill_date,due_date,amount,currency,ageing_bucket
+Harbour Services Ltd,2026-05,Fictional Supplier Beta,BILL-SYN-001,2026-05-05,2026-06-04,6400.0,GBP,Current

@@ -1,0 +1,2 @@
+entity,period,customer,invoice_no,invoice_date,due_date,amount,currency,ageing_bucket
+Northstar Retail Ltd,2026-05,Fictional Customer Alpha,INV-SYN-001,2026-05-02,2026-06-01,9800.0,GBP,Current

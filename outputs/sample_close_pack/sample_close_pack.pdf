@@ -2,8 +2,9 @@
 %יכס¿
 1 0 obj
 <<
-/Count 1
-/Kids [3 0 R]
+/Count 2
+/Kids [3 0 R
+5 0 R]
 /MediaBox [0 0 595.28 841.89]
 /Type /Pages
 >>
@@ -20,69 +21,142 @@ endobj
 <<
 /Contents 4 0 R
 /Parent 1 0 R
-/Resources 7 0 R
+/Resources 9 0 R
 /Type /Page
 >>
 endobj
 4 0 obj
 <<
-/Length 4243
+/Length 11200
 >>
 stream
 2 J
 0.57 w
-BT /F1 18.00 Tf ET
-BT 31.18 793.97 Td (Finance Close Control Tower) Tj ET
-BT /F1 13.00 Tf ET
-BT 31.18 769.96 Td (CFO Close Pack) Tj ET
-BT /F2 10.00 Tf ET
-BT 31.18 751.02 Td (Entity: All sample entities) Tj ET
-BT 31.18 734.01 Td (Period: 2026-05) Tj ET
-BT 31.18 717.00 Td (Generated: 2026-06-16 19:37:26 UTC) Tj ET
-BT 31.18 699.99 Td (Rule version: mvp-0.1.0) Tj ET
-BT /F1 9.00 Tf ET
-q BT 31.18 679.03 Td 0.048 Tw (Synthetic data demo only. No employer, client, bank, payroll, customer, supplier, tax authority, or confidential company data) Tj ET Q
-BT 31.18 664.86 Td (is included.) Tj ET
+0.949 0.9569 0.9686 rg
+0.7059 0.7294 0.7608 RG
+28.35 807.87 538.58 -107.72 re B
+BT /F1 17.00 Tf ET
+q BT 45.35 777.26 Td 0.098 0.098 0.098 rg (Finance Close Control Tower) Tj ET Q
 BT /F1 12.00 Tf ET
-q BT 31.18 637.03 Td 0.1255 0.1255 0.1255 rg (Executive summary) Tj ET Q
+q BT 45.35 757.50 Td 0.098 0.098 0.098 rg (CFO Close Pack) Tj ET Q
 BT /F2 9.00 Tf ET
-q BT 31.18 619.50 Td 0.1569 0.1569 0.1569 rg 0.016 Tw (This report summarizes synthetic month-end close readiness using deterministic finance control checks for reconciliations, cash, VAT,) Tj ET Q
-q BT 31.18 605.33 Td 0.1569 0.1569 0.1569 rg (suspense, and intercompany balances.) Tj ET Q
-q BT 31.18 591.16 Td 0.1569 0.1569 0.1569 rg (Source files checked: 8.) Tj ET Q
+q BT 45.35 741.39 Td 0.098 0.098 0.098 rg (Entity: All sample entities    Period: 2026-05    Generated: 2026-06-16 19:55:35 UTC    Rule version: mvp-0.1.0) Tj ET Q
+0.9608 0.9647 0.9725 rg
+0.8235 0.8392 0.8627 RG
+28.35 651.97 538.59 31.18 re B
+q BT 31.18 672.65 Td 0.1765 0.1765 0.1765 rg 1.894 Tw (Synthetic data demo only. No employer, client, bank, payroll, customer, supplier, tax authority, or confidential company data is) Tj ET Q
+q BT 31.18 657.06 Td 0.1765 0.1765 0.1765 rg (included.) Tj ET Q
 BT /F1 12.00 Tf ET
-q BT 31.18 566.16 Td 0.1255 0.1255 0.1255 rg (Overall close-readiness score) Tj ET Q
+q 28.35 623.62 m 566.93 623.62 l S BT 31.18 631.36 Td 0.1176 0.1176 0.1176 rg (Executive summary) Tj ET Q
 BT /F2 9.00 Tf ET
-q BT 31.18 548.64 Td 0.1569 0.1569 0.1569 rg (Harbour Services Ltd: 44.8/100 \(red\), 5 exceptions.) Tj ET Q
-q BT 31.18 534.47 Td 0.1569 0.1569 0.1569 rg (Northstar Retail Ltd: 97.0/100 \(green\), 1 exception.) Tj ET Q
+q BT 31.18 607.46 Td 0.1765 0.1765 0.1765 rg 2.050 Tw (This CFO close pack summarizes synthetic month-end close readiness using deterministic finance control checks. It highlights) Tj ET Q
+q BT 31.18 591.87 Td 0.1765 0.1765 0.1765 rg 0.180 Tw (reporting readiness, critical exceptions, ageing and suspense exposure, VAT control risk, and intercompany mismatches before close) Tj ET Q
+q BT 31.18 576.28 Td 0.1765 0.1765 0.1765 rg (sign-off.) Tj ET Q
 BT /F1 12.00 Tf ET
-q BT 31.18 509.47 Td 0.1255 0.1255 0.1255 rg (High-risk exception summary) Tj ET Q
-BT /F2 9.00 Tf ET
-q BT 31.18 491.95 Td 0.1569 0.1569 0.1569 rg (CRITICAL | Harbour Services Ltd | Material reconciliation for 1300 Suspense Clearing is Prepared / Pending.) Tj ET Q
-q BT 31.18 477.77 Td 0.1569 0.1569 0.1569 rg (HIGH | Harbour Services Ltd | Suspense account 1300 has material balance 7,500.00.) Tj ET Q
-q BT 31.18 463.60 Td 0.1569 0.1569 0.1569 rg (HIGH | Harbour Services Ltd | Bank rec item is 22 days old with category Unknown bank charge and status Investigating.) Tj ET Q
-q BT 31.18 449.43 Td 0.1569 0.1569 0.1569 rg (CRITICAL | Harbour Services Ltd | VAT closing balance variance is 100.00.) Tj ET Q
-q BT 31.18 435.25 Td 0.1569 0.1569 0.1569 rg (HIGH | Harbour Services Ltd | Intercompany transaction IC-SYN-002 in GBP does not eliminate; variance 2,500.00.) Tj ET Q
+q 28.35 542.83 m 566.93 542.83 l S BT 31.18 550.57 Td 0.1176 0.1176 0.1176 rg (Overall close-readiness scores) Tj ET Q
+0.7451 0.7686 0.8 RG
+0.57 w
+0.9098 0.9216 0.9373 rg
+BT /F1 8.00 Tf ET
+q 28.35 537.17 155.91 -18.43 re B BT 31.18 525.55 Td 0.1176 0.1176 0.1176 rg (Entity) Tj ET Q
+q 184.25 537.17 127.56 -18.43 re B BT 187.09 525.55 Td 0.1176 0.1176 0.1176 rg (Close Readiness Score) Tj ET Q
+q 311.81 537.17 85.04 -18.43 re B BT 314.65 525.55 Td 0.1176 0.1176 0.1176 rg (Status) Tj ET Q
+q 396.85 537.17 99.21 -18.43 re B BT 399.69 525.55 Td 0.1176 0.1176 0.1176 rg (Exception Count) Tj ET Q
+BT /F2 7.50 Tf ET
+q 28.35 518.74 155.91 -18.43 re S BT 31.18 507.28 Td 0.1569 0.1569 0.1569 rg (Harbour Services Ltd) Tj ET Q
+q 184.25 518.74 127.56 -18.43 re S BT 279.79 507.28 Td 0.1569 0.1569 0.1569 rg (44.8/100) Tj ET Q
+q 311.81 518.74 85.04 -18.43 re S BT 347.45 507.28 Td 0.1569 0.1569 0.1569 rg (Red) Tj ET Q
+q 396.85 518.74 99.21 -18.43 re S BT 489.06 507.28 Td 0.1569 0.1569 0.1569 rg (5) Tj ET Q
+q 28.35 500.32 155.91 -18.43 re S BT 31.18 488.85 Td 0.1569 0.1569 0.1569 rg (Northstar Retail Ltd) Tj ET Q
+q 184.25 500.32 127.56 -18.43 re S BT 279.79 488.85 Td 0.1569 0.1569 0.1569 rg (97.0/100) Tj ET Q
+q 311.81 500.32 85.04 -18.43 re S BT 343.91 488.85 Td 0.1569 0.1569 0.1569 rg (Green) Tj ET Q
+q 396.85 500.32 99.21 -18.43 re S BT 489.06 488.85 Td 0.1569 0.1569 0.1569 rg (1) Tj ET Q
 BT /F1 12.00 Tf ET
-q BT 31.18 410.26 Td 0.1255 0.1255 0.1255 rg (Ageing and suspense highlights) Tj ET Q
-BT /F2 9.00 Tf ET
-q BT 31.18 392.73 Td 0.1569 0.1569 0.1569 rg (suspense | Harbour Services Ltd | Suspense account 1300 has material balance 7,500.00.) Tj ET Q
-q BT 31.18 378.56 Td 0.1569 0.1569 0.1569 rg (bank_rec | Northstar Retail Ltd | Bank rec item is 17 days old with category Deposit in transit and status Open.) Tj ET Q
-q BT 31.18 364.39 Td 0.1569 0.1569 0.1569 rg (bank_rec | Harbour Services Ltd | Bank rec item is 22 days old with category Unknown bank charge and status Investigating.) Tj ET Q
+q 28.35 450.71 m 566.93 450.71 l S BT 31.18 458.45 Td 0.1176 0.1176 0.1176 rg (High-risk exception summary) Tj ET Q
+BT /F1 8.00 Tf ET
+q 28.35 445.04 62.36 -18.43 re B BT 31.18 433.43 Td 0.1176 0.1176 0.1176 rg (Risk Level) Tj ET Q
+q 90.71 445.04 96.38 -18.43 re B BT 93.54 433.43 Td 0.1176 0.1176 0.1176 rg (Entity) Tj ET Q
+q 187.09 445.04 79.37 -18.43 re B BT 189.92 433.43 Td 0.1176 0.1176 0.1176 rg (Process) Tj ET Q
+q 266.46 445.04 181.42 -18.43 re B BT 269.29 433.43 Td 0.1176 0.1176 0.1176 rg (Exception) Tj ET Q
+q 447.87 445.04 119.06 -18.43 re B BT 450.71 433.43 Td 0.1176 0.1176 0.1176 rg (Suggested Action) Tj ET Q
+BT /F2 7.50 Tf ET
+q 28.35 426.61 62.36 -18.43 re S BT 31.18 415.15 Td 0.1569 0.1569 0.1569 rg (CRITICAL) Tj ET Q
+q 90.71 426.61 96.38 -18.43 re S BT 93.54 415.15 Td 0.1569 0.1569 0.1569 rg (Harbour Services Ltd) Tj ET Q
+q 187.09 426.61 79.37 -18.43 re S BT 189.92 415.15 Td 0.1569 0.1569 0.1569 rg (Reconciliations) Tj ET Q
+q 266.46 426.61 181.42 -18.43 re S BT 269.29 415.15 Td 0.1569 0.1569 0.1569 rg (Material reconciliation for 1300 Suspense Clearing ...) Tj ET Q
+q 447.87 426.61 119.06 -18.43 re S BT 450.71 415.15 Td 0.1569 0.1569 0.1569 rg (Complete review, attach support...) Tj ET Q
+q 28.35 408.19 62.36 -18.43 re S BT 31.18 396.73 Td 0.1569 0.1569 0.1569 rg (HIGH) Tj ET Q
+q 90.71 408.19 96.38 -18.43 re S BT 93.54 396.73 Td 0.1569 0.1569 0.1569 rg (Harbour Services Ltd) Tj ET Q
+q 187.09 408.19 79.37 -18.43 re S BT 189.92 396.73 Td 0.1569 0.1569 0.1569 rg (Suspense) Tj ET Q
+q 266.46 408.19 181.42 -18.43 re S BT 269.29 396.73 Td 0.1569 0.1569 0.1569 rg (Suspense account 1300 has material balance 7,500.00.) Tj ET Q
+q 447.87 408.19 119.06 -18.43 re S BT 450.71 396.73 Td 0.1569 0.1569 0.1569 rg (Investigate, reclassify valid i...) Tj ET Q
+q 28.35 389.76 62.36 -18.43 re S BT 31.18 378.30 Td 0.1569 0.1569 0.1569 rg (HIGH) Tj ET Q
+q 90.71 389.76 96.38 -18.43 re S BT 93.54 378.30 Td 0.1569 0.1569 0.1569 rg (Harbour Services Ltd) Tj ET Q
+q 187.09 389.76 79.37 -18.43 re S BT 189.92 378.30 Td 0.1569 0.1569 0.1569 rg (Bank Rec) Tj ET Q
+q 266.46 389.76 181.42 -18.43 re S BT 269.29 378.30 Td 0.1569 0.1569 0.1569 rg (Bank rec item is 22 days old with category Unknown ...) Tj ET Q
+q 447.87 389.76 119.06 -18.43 re S BT 450.71 378.30 Td 0.1569 0.1569 0.1569 rg (Match to bank or ledger support...) Tj ET Q
+q 28.35 371.34 62.36 -18.43 re S BT 31.18 359.88 Td 0.1569 0.1569 0.1569 rg (CRITICAL) Tj ET Q
+q 90.71 371.34 96.38 -18.43 re S BT 93.54 359.88 Td 0.1569 0.1569 0.1569 rg (Harbour Services Ltd) Tj ET Q
+q 187.09 371.34 79.37 -18.43 re S BT 189.92 359.88 Td 0.1569 0.1569 0.1569 rg (Vat) Tj ET Q
+q 266.46 371.34 181.42 -18.43 re S BT 269.29 359.88 Td 0.1569 0.1569 0.1569 rg (VAT closing balance variance is 100.00.) Tj ET Q
+q 447.87 371.34 119.06 -18.43 re S BT 450.71 359.88 Td 0.1569 0.1569 0.1569 rg (Reperform the VAT bridge and in...) Tj ET Q
+q 28.35 352.91 62.36 -18.43 re S BT 31.18 341.45 Td 0.1569 0.1569 0.1569 rg (HIGH) Tj ET Q
+q 90.71 352.91 96.38 -18.43 re S BT 93.54 341.45 Td 0.1569 0.1569 0.1569 rg (Harbour Services Ltd) Tj ET Q
+q 187.09 352.91 79.37 -18.43 re S BT 189.92 341.45 Td 0.1569 0.1569 0.1569 rg (Intercompany) Tj ET Q
+q 266.46 352.91 181.42 -18.43 re S BT 269.29 341.45 Td 0.1569 0.1569 0.1569 rg (Intercompany transaction IC-SYN-002 in GBP does not...) Tj ET Q
+q 447.87 352.91 119.06 -18.43 re S BT 450.71 341.45 Td 0.1569 0.1569 0.1569 rg (Confirm counterparty posting, c...) Tj ET Q
 BT /F1 12.00 Tf ET
-q BT 31.18 339.39 Td 0.1255 0.1255 0.1255 rg (VAT / tax control exceptions) Tj ET Q
-BT /F2 9.00 Tf ET
-q BT 31.18 321.87 Td 0.1569 0.1569 0.1569 rg (Harbour Services Ltd | VAT closing balance variance is 100.00.) Tj ET Q
+q 28.35 303.31 m 566.93 303.31 l S BT 31.18 311.05 Td 0.1176 0.1176 0.1176 rg (Ageing and suspense highlights) Tj ET Q
+BT /F1 8.00 Tf ET
+q 28.35 297.64 62.36 -18.43 re B BT 31.18 286.03 Td 0.1176 0.1176 0.1176 rg (Risk Level) Tj ET Q
+q 90.71 297.64 96.38 -18.43 re B BT 93.54 286.03 Td 0.1176 0.1176 0.1176 rg (Entity) Tj ET Q
+q 187.09 297.64 79.37 -18.43 re B BT 189.92 286.03 Td 0.1176 0.1176 0.1176 rg (Process) Tj ET Q
+q 266.46 297.64 181.42 -18.43 re B BT 269.29 286.03 Td 0.1176 0.1176 0.1176 rg (Exception) Tj ET Q
+q 447.87 297.64 119.06 -18.43 re B BT 450.71 286.03 Td 0.1176 0.1176 0.1176 rg (Suggested Action) Tj ET Q
+BT /F2 7.50 Tf ET
+q 28.35 279.21 62.36 -18.43 re S BT 31.18 267.75 Td 0.1569 0.1569 0.1569 rg (HIGH) Tj ET Q
+q 90.71 279.21 96.38 -18.43 re S BT 93.54 267.75 Td 0.1569 0.1569 0.1569 rg (Harbour Services Ltd) Tj ET Q
+q 187.09 279.21 79.37 -18.43 re S BT 189.92 267.75 Td 0.1569 0.1569 0.1569 rg (Suspense) Tj ET Q
+q 266.46 279.21 181.42 -18.43 re S BT 269.29 267.75 Td 0.1569 0.1569 0.1569 rg (Suspense account 1300 has material balance 7,500.00.) Tj ET Q
+q 447.87 279.21 119.06 -18.43 re S BT 450.71 267.75 Td 0.1569 0.1569 0.1569 rg (Investigate, reclassify valid i...) Tj ET Q
+q 28.35 260.79 62.36 -18.43 re S BT 31.18 249.33 Td 0.1569 0.1569 0.1569 rg (WARNING) Tj ET Q
+q 90.71 260.79 96.38 -18.43 re S BT 93.54 249.33 Td 0.1569 0.1569 0.1569 rg (Northstar Retail Ltd) Tj ET Q
+q 187.09 260.79 79.37 -18.43 re S BT 189.92 249.33 Td 0.1569 0.1569 0.1569 rg (Bank Rec) Tj ET Q
+q 266.46 260.79 181.42 -18.43 re S BT 269.29 249.33 Td 0.1569 0.1569 0.1569 rg (Bank rec item is 17 days old with category Deposit ...) Tj ET Q
+q 447.87 260.79 119.06 -18.43 re S BT 450.71 249.33 Td 0.1569 0.1569 0.1569 rg (Match to bank or ledger support...) Tj ET Q
+q 28.35 242.36 62.36 -18.43 re S BT 31.18 230.90 Td 0.1569 0.1569 0.1569 rg (HIGH) Tj ET Q
+q 90.71 242.36 96.38 -18.43 re S BT 93.54 230.90 Td 0.1569 0.1569 0.1569 rg (Harbour Services Ltd) Tj ET Q
+q 187.09 242.36 79.37 -18.43 re S BT 189.92 230.90 Td 0.1569 0.1569 0.1569 rg (Bank Rec) Tj ET Q
+q 266.46 242.36 181.42 -18.43 re S BT 269.29 230.90 Td 0.1569 0.1569 0.1569 rg (Bank rec item is 22 days old with category Unknown ...) Tj ET Q
+q 447.87 242.36 119.06 -18.43 re S BT 450.71 230.90 Td 0.1569 0.1569 0.1569 rg (Match to bank or ledger support...) Tj ET Q
 BT /F1 12.00 Tf ET
-q BT 31.18 296.87 Td 0.1255 0.1255 0.1255 rg (Intercompany mismatch summary) Tj ET Q
-BT /F2 9.00 Tf ET
-q BT 31.18 279.35 Td 0.1569 0.1569 0.1569 rg (Harbour Services Ltd | Intercompany transaction IC-SYN-002 in GBP does not eliminate; variance 2,500.00.) Tj ET Q
+q 28.35 192.76 m 566.93 192.76 l S BT 31.18 200.49 Td 0.1176 0.1176 0.1176 rg (VAT / tax control exceptions) Tj ET Q
+BT /F1 8.00 Tf ET
+q 28.35 187.09 62.36 -18.43 re B BT 31.18 175.47 Td 0.1176 0.1176 0.1176 rg (Risk Level) Tj ET Q
+q 90.71 187.09 96.38 -18.43 re B BT 93.54 175.47 Td 0.1176 0.1176 0.1176 rg (Entity) Tj ET Q
+q 187.09 187.09 79.37 -18.43 re B BT 189.92 175.47 Td 0.1176 0.1176 0.1176 rg (Process) Tj ET Q
+q 266.46 187.09 181.42 -18.43 re B BT 269.29 175.47 Td 0.1176 0.1176 0.1176 rg (Exception) Tj ET Q
+q 447.87 187.09 119.06 -18.43 re B BT 450.71 175.47 Td 0.1176 0.1176 0.1176 rg (Suggested Action) Tj ET Q
+BT /F2 7.50 Tf ET
+q 28.35 168.66 62.36 -18.43 re S BT 31.18 157.20 Td 0.1569 0.1569 0.1569 rg (CRITICAL) Tj ET Q
+q 90.71 168.66 96.38 -18.43 re S BT 93.54 157.20 Td 0.1569 0.1569 0.1569 rg (Harbour Services Ltd) Tj ET Q
+q 187.09 168.66 79.37 -18.43 re S BT 189.92 157.20 Td 0.1569 0.1569 0.1569 rg (Vat) Tj ET Q
+q 266.46 168.66 181.42 -18.43 re S BT 269.29 157.20 Td 0.1569 0.1569 0.1569 rg (VAT closing balance variance is 100.00.) Tj ET Q
+q 447.87 168.66 119.06 -18.43 re S BT 450.71 157.20 Td 0.1569 0.1569 0.1569 rg (Reperform the VAT bridge and in...) Tj ET Q
 BT /F1 12.00 Tf ET
-q BT 31.18 254.35 Td 0.1255 0.1255 0.1255 rg (Suggested finance actions / next steps) Tj ET Q
-BT /F2 9.00 Tf ET
-q BT 31.18 236.83 Td 0.1569 0.1569 0.1569 rg (- Clear or review critical reconciliation and VAT exceptions before sign-off.) Tj ET Q
-q BT 31.18 222.65 Td 0.1569 0.1569 0.1569 rg (- Investigate aged cash and suspense items before final management reporting.) Tj ET Q
-q BT 31.18 208.48 Td 0.1569 0.1569 0.1569 rg (- Resolve intercompany mismatches before consolidation or group reporting.) Tj ET Q
-q BT 31.18 194.31 Td 0.1569 0.1569 0.1569 rg (- Keep the synthetic-data disclaimer with any shared portfolio outputs.) Tj ET Q
+q 28.35 119.06 m 566.93 119.06 l S BT 31.18 126.79 Td 0.1176 0.1176 0.1176 rg (Intercompany mismatch summary) Tj ET Q
+BT /F1 8.00 Tf ET
+q 28.35 113.39 62.36 -18.43 re B BT 31.18 101.77 Td 0.1176 0.1176 0.1176 rg (Risk Level) Tj ET Q
+q 90.71 113.39 96.38 -18.43 re B BT 93.54 101.77 Td 0.1176 0.1176 0.1176 rg (Entity) Tj ET Q
+q 187.09 113.39 79.37 -18.43 re B BT 189.92 101.77 Td 0.1176 0.1176 0.1176 rg (Process) Tj ET Q
+q 266.46 113.39 181.42 -18.43 re B BT 269.29 101.77 Td 0.1176 0.1176 0.1176 rg (Exception) Tj ET Q
+q 447.87 113.39 119.06 -18.43 re B BT 450.71 101.77 Td 0.1176 0.1176 0.1176 rg (Suggested Action) Tj ET Q
+BT /F2 7.50 Tf ET
+q 28.35 94.96 62.36 -18.43 re S BT 31.18 83.50 Td 0.1569 0.1569 0.1569 rg (HIGH) Tj ET Q
+q 90.71 94.96 96.38 -18.43 re S BT 93.54 83.50 Td 0.1569 0.1569 0.1569 rg (Harbour Services Ltd) Tj ET Q
+q 187.09 94.96 79.37 -18.43 re S BT 189.92 83.50 Td 0.1569 0.1569 0.1569 rg (Intercompany) Tj ET Q
+q 266.46 94.96 181.42 -18.43 re S BT 269.29 83.50 Td 0.1569 0.1569 0.1569 rg (Intercompany transaction IC-SYN-002 in GBP does not...) Tj ET Q
+q 447.87 94.96 119.06 -18.43 re S BT 450.71 83.50 Td 0.1569 0.1569 0.1569 rg (Confirm counterparty posting, c...) Tj ET Q
 BT /F2 8.00 Tf ET
 q BT 169.52 23.11 Td 0.3529 0.3529 0.3529 rg (Synthetic portfolio demo | Finance Close Control Tower | Zahidah Murira) Tj ET Q
 
@@ -90,13 +164,42 @@ endstream
 endobj
 5 0 obj
 <<
+/Contents 6 0 R
+/Parent 1 0 R
+/Resources 10 0 R
+/Type /Page
+>>
+endobj
+6 0 obj
+<<
+/Length 878
+>>
+stream
+2 J
+0.57 w
+0.7451 0.7686 0.8 RG
+0.9098 0.9216 0.9373 rg
+BT /F1 12.00 Tf ET
+q 28.35 790.87 m 566.93 790.87 l S BT 31.18 798.60 Td 0.1176 0.1176 0.1176 rg (Management Action Plan) Tj ET Q
+BT /F2 9.00 Tf ET
+q BT 31.18 774.70 Td 0.1765 0.1765 0.1765 rg (1. Clear or review critical reconciliation and VAT exceptions before sign-off.) Tj ET Q
+q BT 31.18 759.11 Td 0.1765 0.1765 0.1765 rg (2. Investigate aged cash and suspense items before final management reporting.) Tj ET Q
+q BT 31.18 743.52 Td 0.1765 0.1765 0.1765 rg (3. Resolve intercompany mismatches before consolidation or group reporting.) Tj ET Q
+q BT 31.18 727.93 Td 0.1765 0.1765 0.1765 rg (4. Retain the synthetic-data disclaimer with any shared portfolio outputs.) Tj ET Q
+BT /F2 8.00 Tf ET
+q BT 169.52 23.11 Td 0.3529 0.3529 0.3529 rg (Synthetic portfolio demo | Finance Close Control Tower | Zahidah Murira) Tj ET Q
+
+endstream
+endobj
+7 0 obj
+<<
 /BaseFont /Helvetica-Bold
 /Encoding /WinAnsiEncoding
 /Subtype /Type1
 /Type /Font
 >>
 endobj
-6 0 obj
+8 0 obj
 <<
 /BaseFont /Helvetica
 /Encoding /WinAnsiEncoding
@@ -104,39 +207,49 @@ endobj
 /Type /Font
 >>
 endobj
-7 0 obj
+9 0 obj
 <<
-/Font <</F1 5 0 R
-/F2 6 0 R>>
+/Font <</F1 7 0 R
+/F2 8 0 R>>
 /ProcSet [/PDF /Text /ImageB /ImageC /ImageI]
 >>
 endobj
-8 0 obj
+10 0 obj
+<<
+/Font <</F1 7 0 R
+/F2 8 0 R>>
+/ProcSet [/PDF /Text /ImageB /ImageC /ImageI]
+>>
+endobj
+11 0 obj
 <<
 /Author (Zahidah Murira)
-/CreationDate (D:20260616193726Z)
+/CreationDate (D:20260616195535Z)
 /Subject (Synthetic data portfolio demo)
 /Title (Finance Close Control Tower CFO Close Pack)
 >>
 endobj
 xref
-0 9
+0 12
 0000000000 65535 f 
 0000000015 00000 n 
-0000000102 00000 n 
-0000000205 00000 n 
-0000000285 00000 n 
-0000004580 00000 n 
-0000004682 00000 n 
-0000004779 00000 n 
-0000004876 00000 n 
+0000000108 00000 n 
+0000000211 00000 n 
+0000000291 00000 n 
+0000011544 00000 n 
+0000011625 00000 n 
+0000012554 00000 n 
+0000012656 00000 n 
+0000012753 00000 n 
+0000012850 00000 n 
+0000012948 00000 n 
 trailer
 <<
-/Size 9
+/Size 12
 /Root 2 0 R
-/Info 8 0 R
-/ID [<92E7070AF3ECC3A54BF43ECCD6A488BB><92E7070AF3ECC3A54BF43ECCD6A488BB>]
+/Info 11 0 R
+/ID [<2A1418AF2FDA53F6CDC7F46702D2523E><2A1418AF2FDA53F6CDC7F46702D2523E>]
 >>
 startxref
-5049
+13122
 %%EOF

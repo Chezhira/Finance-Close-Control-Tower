@@ -46,9 +46,13 @@ def test_pdf_close_pack_contains_required_report_sections() -> None:
     assert "CFO Close Pack" in pdf_text
     assert "Synthetic data demo only" in pdf_text
     assert "Executive summary" in pdf_text
-    assert "Overall close-readiness score" in pdf_text
+    assert "Overall close-readiness scores" in pdf_text
+    assert "Close Readiness Score" in pdf_text
+    assert "Exception Count" in pdf_text
     assert "High-risk exception summary" in pdf_text
+    assert "Risk Level" in pdf_text
+    assert "Suggested Action" in pdf_text
     assert "Ageing and suspense highlights" in pdf_text
     assert "VAT / tax control exceptions" in pdf_text
     assert "Intercompany mismatch summary" in pdf_text
-    assert "Suggested finance actions / next steps" in pdf_text
+    assert "Management Action Plan" in pdf_text

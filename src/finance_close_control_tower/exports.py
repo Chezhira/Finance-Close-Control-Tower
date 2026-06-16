@@ -223,17 +223,112 @@ class ClosePackPDF(FPDF):
         )
 
 
-def _write_pdf_section(pdf: FPDF, title: str, lines: list[str]) -> None:
+def _format_process_area(process_area: str) -> str:
+    return process_area.replace("_", " ").title()
+
+
+def _truncate_cell(value: object, max_chars: int) -> str:
+    text = "" if pd.isna(value) else str(value)
+    text = " ".join(text.split())
+    if len(text) <= max_chars:
+        return text
+    return f"{text[: max_chars - 3]}..."
+
+
+def _ensure_pdf_space(pdf: FPDF, height: float) -> None:
+    if pdf.get_y() + height > pdf.page_break_trigger:
+        pdf.add_page()
+
+
+def _write_pdf_heading(pdf: FPDF, title: str) -> None:
+    _ensure_pdf_space(pdf, 14)
     pdf.set_x(pdf.l_margin)
     pdf.set_font("Helvetica", style="B", size=12)
-    pdf.set_text_color(32, 32, 32)
-    pdf.cell(0, 8, title, new_x="LMARGIN", new_y="NEXT")
-    pdf.set_font("Helvetica", size=9)
-    pdf.set_text_color(40, 40, 40)
-    for line in lines:
-        pdf.set_x(pdf.l_margin)
-        pdf.multi_cell(0, 5, line, new_x="LMARGIN", new_y="NEXT")
+    pdf.set_text_color(30, 30, 30)
+    pdf.cell(0, 8, title, new_x="LMARGIN", new_y="NEXT", border="B")
     pdf.ln(2)
+
+
+def _write_pdf_paragraph(pdf: FPDF, text: str, *, fill: bool = False) -> None:
+    _ensure_pdf_space(pdf, 18)
+    pdf.set_font("Helvetica", size=9)
+    pdf.set_text_color(45, 45, 45)
+    pdf.set_x(pdf.l_margin)
+    if fill:
+        pdf.set_fill_color(245, 246, 248)
+        pdf.set_draw_color(210, 214, 220)
+        pdf.multi_cell(0, 5.5, text, border=1, fill=True, new_x="LMARGIN", new_y="NEXT")
+    else:
+        pdf.multi_cell(0, 5.5, text, new_x="LMARGIN", new_y="NEXT")
+    pdf.ln(2)
+
+
+def _write_pdf_table(
+    pdf: FPDF,
+    headers: list[str],
+    rows: list[list[object]],
+    widths: list[float],
+    *,
+    max_chars: list[int],
+    aligns: list[str] | None = None,
+) -> None:
+    aligns = aligns or ["L"] * len(headers)
+    row_height = 6.5
+    _ensure_pdf_space(pdf, row_height * (min(len(rows), 3) + 2))
+    pdf.set_draw_color(190, 196, 204)
+    pdf.set_line_width(0.2)
+    pdf.set_font("Helvetica", style="B", size=8)
+    pdf.set_text_color(30, 30, 30)
+    pdf.set_fill_color(232, 235, 239)
+    for header, width in zip(headers, widths, strict=True):
+        pdf.cell(width, row_height, header, border=1, fill=True)
+    pdf.ln(row_height)
+
+    pdf.set_font("Helvetica", size=7.5)
+    pdf.set_text_color(40, 40, 40)
+    if not rows:
+        pdf.cell(sum(widths), row_height, "No exceptions detected.", border=1)
+        pdf.ln(row_height)
+        pdf.ln(3)
+        return
+
+    for row in rows:
+        _ensure_pdf_space(pdf, row_height * 2)
+        for value, width, max_char, align in zip(row, widths, max_chars, aligns, strict=True):
+            pdf.cell(
+                width,
+                row_height,
+                _truncate_cell(value, max_char),
+                border=1,
+                align=align,
+            )
+        pdf.ln(row_height)
+    pdf.ln(3)
+
+
+def _exception_rows(frame: pd.DataFrame) -> list[list[object]]:
+    return [
+        [
+            str(row.severity).upper(),
+            row.entity,
+            _format_process_area(str(row.process_area)),
+            row.message,
+            row.finance_action,
+        ]
+        for row in frame.itertuples(index=False)
+    ]
+
+
+def _score_rows(frame: pd.DataFrame) -> list[list[object]]:
+    return [
+        [
+            row.entity,
+            f"{float(row.score):.1f}/100",
+            str(row.status).title(),
+            int(row.exception_count),
+        ]
+        for row in frame.itertuples(index=False)
+    ]
 
 
 def _build_pdf_close_pack(model: ClosePackModel) -> bytes:
@@ -261,82 +356,99 @@ def _build_pdf_close_pack(model: ClosePackModel) -> bytes:
     pdf.set_author("Zahidah Murira")
     pdf.set_subject("Synthetic data portfolio demo")
 
-    pdf.set_font("Helvetica", style="B", size=18)
-    pdf.cell(0, 10, "Finance Close Control Tower", new_x="LMARGIN", new_y="NEXT")
-    pdf.set_font("Helvetica", style="B", size=13)
-    pdf.cell(0, 8, "CFO Close Pack", new_x="LMARGIN", new_y="NEXT")
-    pdf.set_font("Helvetica", size=10)
+    pdf.set_fill_color(242, 244, 247)
+    pdf.set_draw_color(180, 186, 194)
+    pdf.rect(pdf.l_margin, 12, 190, 38, style="DF")
+    pdf.set_xy(pdf.l_margin + 5, 17)
+    pdf.set_font("Helvetica", style="B", size=17)
+    pdf.set_text_color(25, 25, 25)
+    pdf.cell(0, 8, "Finance Close Control Tower", new_x="LMARGIN", new_y="NEXT")
+    pdf.set_x(pdf.l_margin + 5)
+    pdf.set_font("Helvetica", style="B", size=12)
+    pdf.cell(0, 7, "CFO Close Pack", new_x="LMARGIN", new_y="NEXT")
+    pdf.set_x(pdf.l_margin + 5)
+    pdf.set_font("Helvetica", size=9)
     pdf.multi_cell(
-        0,
-        6,
-        f"Entity: {model.entity_scope}\n"
-        f"Period: {model.period}\n"
-        f"Generated: {model.generated_at}\n"
-        f"Rule version: {DEFAULT_CONFIG.rule_version}",
+        180,
+        5,
+        f"Entity: {model.entity_scope}    Period: {model.period}    "
+        f"Generated: {model.generated_at}    Rule version: {DEFAULT_CONFIG.rule_version}",
+        new_x="LMARGIN",
+        new_y="NEXT",
     )
-    pdf.ln(2)
-    pdf.set_font("Helvetica", style="B", size=9)
-    pdf.multi_cell(0, 5, SYNTHETIC_DISCLAIMER)
-    pdf.ln(3)
+    pdf.set_y(56)
 
-    _write_pdf_section(
+    _write_pdf_paragraph(pdf, SYNTHETIC_DISCLAIMER, fill=True)
+
+    _write_pdf_heading(pdf, "Executive summary")
+    _write_pdf_paragraph(
         pdf,
-        "Executive summary",
-        [
-            "This report summarizes synthetic month-end close readiness using deterministic "
-            "finance control checks for reconciliations, cash, VAT, suspense, and "
-            "intercompany balances.",
-            f"Source files checked: {len(model.datasets)}.",
-        ],
+        "This CFO close pack summarizes synthetic month-end close readiness using "
+        "deterministic finance control checks. It highlights reporting readiness, "
+        "critical exceptions, ageing and suspense exposure, VAT control risk, and "
+        "intercompany mismatches before close sign-off.",
     )
-    _write_pdf_section(
+
+    _write_pdf_heading(pdf, "Overall close-readiness scores")
+    _write_pdf_table(
         pdf,
-        "Overall close-readiness score",
-        [
-            f"{row.entity}: {row.score}/100 ({row.status}), "
-            f"{row.exception_count} {_pluralize_exception(row.exception_count)}."
-            for row in selected_overall.itertuples(index=False)
-        ],
+        ["Entity", "Close Readiness Score", "Status", "Exception Count"],
+        _score_rows(selected_overall),
+        [55, 45, 30, 35],
+        max_chars=[28, 24, 16, 10],
+        aligns=["L", "R", "C", "R"],
     )
-    _write_pdf_section(
+
+    table_headers = ["Risk Level", "Entity", "Process", "Exception", "Suggested Action"]
+    table_widths = [22, 34, 28, 64, 42]
+    table_chars = [12, 22, 16, 54, 34]
+
+    _write_pdf_heading(pdf, "High-risk exception summary")
+    _write_pdf_table(
         pdf,
-        "High-risk exception summary",
-        [
-            f"{row.severity.upper()} | {row.entity} | {row.message}"
-            for row in high_risk.itertuples(index=False)
-        ]
-        or ["No high-risk exceptions detected."],
+        table_headers,
+        _exception_rows(high_risk),
+        table_widths,
+        max_chars=table_chars,
     )
-    _write_pdf_section(
+
+    _write_pdf_heading(pdf, "Ageing and suspense highlights")
+    _write_pdf_table(
         pdf,
-        "Ageing and suspense highlights",
-        [
-            f"{row.process_area} | {row.entity} | {row.message}"
-            for row in bank_and_suspense.itertuples(index=False)
-        ]
-        or ["No ageing or suspense highlights detected."],
+        table_headers,
+        _exception_rows(bank_and_suspense),
+        table_widths,
+        max_chars=table_chars,
     )
-    _write_pdf_section(
+
+    _write_pdf_heading(pdf, "VAT / tax control exceptions")
+    _write_pdf_table(
         pdf,
-        "VAT / tax control exceptions",
-        [f"{row.entity} | {row.message}" for row in vat_exceptions.itertuples(index=False)]
-        or ["No VAT control exceptions detected."],
+        table_headers,
+        _exception_rows(vat_exceptions),
+        table_widths,
+        max_chars=table_chars,
     )
-    _write_pdf_section(
+
+    _write_pdf_heading(pdf, "Intercompany mismatch summary")
+    _write_pdf_table(
         pdf,
-        "Intercompany mismatch summary",
-        [f"{row.entity} | {row.message}" for row in intercompany.itertuples(index=False)]
-        or ["No intercompany mismatches detected."],
+        table_headers,
+        _exception_rows(intercompany),
+        table_widths,
+        max_chars=table_chars,
     )
-    _write_pdf_section(
+
+    _write_pdf_heading(pdf, "Management Action Plan")
+    action_items = [
+        "1. Clear or review critical reconciliation and VAT exceptions before sign-off.",
+        "2. Investigate aged cash and suspense items before final management reporting.",
+        "3. Resolve intercompany mismatches before consolidation or group reporting.",
+        "4. Retain the synthetic-data disclaimer with any shared portfolio outputs.",
+    ]
+    _write_pdf_paragraph(
         pdf,
-        "Suggested finance actions / next steps",
-        [
-            "- Clear or review critical reconciliation and VAT exceptions before sign-off.",
-            "- Investigate aged cash and suspense items before final management reporting.",
-            "- Resolve intercompany mismatches before consolidation or group reporting.",
-            "- Keep the synthetic-data disclaimer with any shared portfolio outputs.",
-        ],
+        "\n".join(action_items),
     )
 
     return bytes(pdf.output())

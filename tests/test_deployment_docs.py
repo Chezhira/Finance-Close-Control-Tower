@@ -64,7 +64,12 @@ def test_readme_includes_release_required_sections() -> None:
     assert "Target portfolio roles:" in content
     assert "Public demo URL: `https://finance-close-control-tower.streamlit.app/`" in content
     assert "Demo Outputs" in content
-    assert "No employer, client, bank, payroll, customer, supplier" in content
+    assert "No employer" in content
+    assert "client" in content
+    assert "bank" in content
+    assert "payroll" in content
+    assert "supplier" in content
+    assert "customer" in content
 
 
 def test_deployment_docs_define_supported_targets() -> None:

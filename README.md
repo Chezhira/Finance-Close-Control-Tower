@@ -7,9 +7,10 @@
 ![License](https://img.shields.io/badge/License-Portfolio%20Use%20Only-lightgrey)
 ![Data](https://img.shields.io/badge/Data-Synthetic%20Only-green)
 
-Finance Close Control Tower is a production-style finance systems control layer for month-end close readiness. It turns synthetic accounting exports into a CFO-ready view of reconciled balances, unresolved exceptions, ageing risk, material control issues, and actions needed before reporting.
+Finance Close Control Tower is a production-style finance systems control layer for month-end close readiness. It turns accounting exports into a CFO-ready view of reconciled balances, unresolved exceptions, ageing risk, material control issues, and actions needed before reporting.
 
-All data in this repository is synthetic. No employer, client, bank, payroll, customer, supplier, tax authority, or confidential company data is included.
+This public demo uses synthetic sample data only. No employer, client, bank, payroll, supplier, customer, tax authority, or confidential company data is included.
+
 
 Target portfolio roles:
 

@@ -3,7 +3,8 @@ __pycache__/
 .pytest_cache/
 .pytest_tmp*/
 .ruff_cache/
-.streamlit/
+.streamlit/*
+!.streamlit/config.toml
 .env
 .env.*
 !.env.example

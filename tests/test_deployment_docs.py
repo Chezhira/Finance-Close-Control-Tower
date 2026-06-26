@@ -9,7 +9,18 @@ def test_streamlit_cloud_entrypoint_exists() -> None:
 
     assert app_path.exists()
     assert "import streamlit as st" in content
+    assert "def apply_chez_theme() -> None:" in content
+    assert "Chez Solutions Finance Systems Lab" in content
     assert "st.file_uploader" not in content
+
+
+def test_streamlit_theme_config_uses_chez_brand_colours() -> None:
+    content = Path(".streamlit/config.toml").read_text(encoding="utf-8")
+
+    assert 'primaryColor = "#D4A017"' in content
+    assert 'backgroundColor = "#0F172A"' in content
+    assert 'secondaryBackgroundColor = "#1E293B"' in content
+    assert 'textColor = "#F8FAFC"' in content
 
 
 def test_requirements_are_runtime_only_for_public_demo() -> None:

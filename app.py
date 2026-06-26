@@ -102,6 +102,166 @@ DISPLAY_LABELS = {
 }
 
 
+def apply_chez_theme() -> None:
+    st.markdown(
+        """
+        <style>
+        .stApp {
+            background:
+                radial-gradient(circle at top left, rgba(212,160,23,0.18), transparent 32%),
+                linear-gradient(135deg, #0F172A 0%, #111827 48%, #020617 100%);
+        }
+
+        .block-container {
+            padding-top: 2rem;
+            padding-bottom: 3rem;
+        }
+
+        section[data-testid="stSidebar"] {
+            background: #020617;
+            border-right: 1px solid rgba(212,160,23,0.22);
+        }
+
+        h1, h2, h3 {
+            color: #F8FAFC;
+            letter-spacing: -0.02em;
+        }
+
+        h4, h5, h6, p, li, span, div {
+            color: #E5E7EB;
+        }
+
+        [data-testid="stMetric"] {
+            background: rgba(30, 41, 59, 0.86);
+            border: 1px solid rgba(212,160,23,0.28);
+            padding: 18px;
+            border-radius: 18px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.24);
+        }
+
+        [data-testid="stMetricLabel"] {
+            color: #CBD5E1;
+        }
+
+        [data-testid="stMetricValue"] {
+            color: #F8FAFC;
+        }
+
+        [data-testid="stMetricDelta"] {
+            color: #FACC15;
+        }
+
+        .stButton > button, .stDownloadButton > button {
+            background: linear-gradient(90deg, #D4A017, #FACC15);
+            color: #111827;
+            border: none;
+            border-radius: 999px;
+            font-weight: 700;
+            padding: 0.65rem 1.15rem;
+        }
+
+        .stButton > button:hover, .stDownloadButton > button:hover {
+            background: linear-gradient(90deg, #FACC15, #D4A017);
+            color: #111827;
+            border: none;
+        }
+
+        button[data-baseweb="tab"] {
+            background: rgba(255,255,255,0.06);
+            border-radius: 999px;
+            margin-right: 8px;
+            padding: 8px 18px;
+        }
+
+        button[data-baseweb="tab"][aria-selected="true"] {
+            background: rgba(212,160,23,0.22);
+            color: #FACC15;
+        }
+
+        [data-testid="stDataFrame"] {
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(212,160,23,0.18);
+        }
+
+        div[data-testid="stAlert"] {
+            border-radius: 16px;
+        }
+
+        .chez-hero {
+            padding: 30px;
+            border-radius: 26px;
+            background:
+                linear-gradient(135deg, rgba(212,160,23,0.26), rgba(15,23,42,0.92)),
+                linear-gradient(90deg, #0F172A, #111827);
+            border: 1px solid rgba(212,160,23,0.38);
+            margin-bottom: 28px;
+            box-shadow: 0 18px 45px rgba(0,0,0,0.26);
+        }
+
+        .chez-kicker {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 999px;
+            background: rgba(212,160,23,0.16);
+            color: #FACC15;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 14px;
+        }
+
+        .chez-hero h1 {
+            margin: 0 0 10px 0;
+            color: #F8FAFC;
+        }
+
+        .chez-hero p {
+            font-size: 18px;
+            color: #CBD5E1;
+            max-width: 900px;
+            margin: 0;
+            line-height: 1.55;
+        }
+
+        .chez-section-card {
+            background: rgba(30, 41, 59, 0.72);
+            border: 1px solid rgba(212,160,23,0.18);
+            border-radius: 20px;
+            padding: 20px;
+            margin: 12px 0 20px 0;
+        }
+
+        .chez-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 700;
+            background: rgba(212,160,23,0.14);
+            color: #FACC15;
+            border: 1px solid rgba(212,160,23,0.24);
+        }
+
+        .status-good {
+            color: #22C55E;
+            font-weight: 700;
+        }
+
+        .status-warning {
+            color: #F59E0B;
+            font-weight: 700;
+        }
+
+        .status-danger {
+            color: #EF4444;
+            font-weight: 700;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
 @st.cache_data
 def load_mvp_model() -> tuple[dict[str, pd.DataFrame], pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     datasets = load_sample_data(DATA_DIR)
@@ -184,18 +344,27 @@ def show_exception_view(process_area: str, title: str) -> None:
     )
 
 
+apply_chez_theme()
+
 datasets, exceptions, process_scores, overall_scores = load_mvp_model()
 periods = sorted(overall_scores["period"].astype(str).unique())
 entities = sorted(overall_scores["entity"].astype(str).unique())
 
-st.title("Finance Close Control Tower")
-st.caption("Month-end finance systems control layer | Synthetic data demo")
+st.markdown(
+    """
+    <div class="chez-hero">
+        <div class="chez-kicker">Chez Solutions Finance Systems Lab</div>
+        <h1>Finance Close Control Tower</h1>
+        <p>
+            Premium month-end close dashboard for synthetic finance data, built around
+            close-readiness scoring, exception discipline, and CFO-ready reporting.
+        </p>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
 with st.expander("Synthetic-data and privacy note", expanded=False):
     st.caption(SYNTHETIC_DISCLAIMER)
-st.write(
-    "This demo turns standard finance exports into a close-readiness view: what is "
-    "reconciled, what is unresolved, what is ageing, and what needs action before CFO sign-off."
-)
 
 with st.sidebar:
     st.header("Close View")
